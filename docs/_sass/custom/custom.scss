@@ -1,17 +1,14 @@
-$link-color: #ff5a5f;
-$link-color: #00a699;
-$link-color: #999;
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700');
 
 body {
     font-family: 'Open Sans', sans-serif;
     --side-bar-size: 240px;
 }
-
 .site-footer {
     display: none;
 }
+
+a { color: #999; }
 
 pre.highlight, figure.highlight, code {
     background-color: inherit;
@@ -77,6 +74,7 @@ code {
  *  Dracula Code highlight theme
  */
 .highlight .hll { background-color: #f1fa8c }
+.highlighter-rouge { background-color: #282a36; }
 .highlight { background: #282a36; color: #f8f8f2 }
 .highlight .c { color: #6272a4 } /* Comment */
 .highlight .err { color: #f8f8f2 } /* Error */
