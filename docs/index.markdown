@@ -6,14 +6,14 @@ nav_order: 1
 
 # Home
 
-This is the Node.js SDK for [https://schemadb.com](https://schemadb.com).
+This is the Node.js SDK for [https://tinybird.co](https://tinybird.co).
 
 **WARNING: this is still WIP.**
 
 ## Installation
 
 ```bash
-npm i @schemadb/sdk
+npm i @alejandromav/tinybird-nodejs-sdk
 ```
 
 ## Usage

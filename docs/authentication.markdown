@@ -6,9 +6,9 @@ nav_order: 2
 
 # Authentication
 
-You need to initialize this SDK with you API token before doing anything. You can get your on https://www.schemadb.com/login.
+You need to initialize this SDK with you API token before doing anything. You can get your on https://tinybird.co.
 
 ```js
-const schemadb = require('@schemadb/sdk');
-schemadb.init('1036fae0-3a28-11ea-a5e3-...');
+const tb = require('@alejandromav/tinybird-nodejs-sdk');
+tb.init('1036fae0-3a28-11ea-a5e3-...');
 ```

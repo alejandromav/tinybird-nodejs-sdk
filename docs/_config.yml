@@ -18,20 +18,20 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: '@schemadb/sdk'
+title: '@alejandromav/tinybird-nodejs-sdk'
 # email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-baseurl: "/node-sdk" # the subpath of your site, e.g. /blog
+baseurl: "/tinybird-nodejs-sdk" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Enable or disable the site search
 search_enabled: true
 
 # Footer content appears at the bottom of every page's main content
-footer_content: "Copyright &copy; 2020 SchemaDB. Distributed by an <a href=\"https://github.com/schemadb/node-sdk/tree/master/LICENSE.txt\">MIT license.</a>"
+footer_content: "Copyright &copy; 2022 Alejandro Martín. Distributed by an <a href=\"https://github.com/alejandromav/tinybird-nodejs-sdk/tree/master/LICENSE.txt\">MIT license.</a>"
 
 # Color scheme currently only supports "dark" or nil (default)
 color_scheme: nil
