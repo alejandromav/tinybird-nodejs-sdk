@@ -1,0 +1,25 @@
+
+name: CI
+
+on: [ push ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js LTS
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: npm install, build and test
+      run: |
+        npm install
+        npm run lint --if-present
+        npm run test
+        npm run build
+      env:
+        CI: true
+        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

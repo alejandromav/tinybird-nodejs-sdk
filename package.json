@@ -1,0 +1,46 @@
+{
+    "name": "@alejandromav/tinybird-sdk",
+    "version": "0.1.0-SNAPSHOT",
+    "description": "Tinybird Node.js SDK",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "mocha --require @babel/register",
+        "test:coverage": "nyc --reporter=html mocha --require @babel/register",
+        "test:watch": "mocha --require @babel/register -w",
+        "lint": "eslint -c .eslintrc.yml src/**",
+        "build": "babel src --out-dir dist",
+        "prepublishOnly": "npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alejandromav/tinybird-nodejs-sdk.git"
+    },
+    "keywords": [
+        "tinybird",
+        "sdk"
+    ],
+    "files": [
+        "dist"
+    ],
+    "author": "Alejandro Martin <hi@alejandromav.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/alejandromav/tinybird-nodejs-sdk/issues"
+    },
+    "homepage": "https://github.com/alejandromav/tinybird-nodejs-sdk#readme",
+    "devDependencies": {
+        "@babel/cli": "^7.17.10",
+        "@babel/core": "^7.18.2",
+        "@babel/node": "^7.17.10",
+        "@babel/preset-env": "^7.18.2",
+        "@babel/register": "^7.17.7",
+        "babel-preset-minify": "^0.5.2",
+        "chai": "^4.3.6",
+        "eslint": "^8.16.0",
+        "mocha": "^10.0.0",
+        "nyc": "^15.1.0"
+    },
+    "dependencies": {
+        "log4js": "^6.5.1"
+    }
+}

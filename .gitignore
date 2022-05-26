@@ -1,0 +1,10 @@
+.DS_Store
+dist
+node_modules
+*.log
+.bundle
+vendor
+coverage
+.nyc_output
+.npmrc
+test/learn-tests.js
