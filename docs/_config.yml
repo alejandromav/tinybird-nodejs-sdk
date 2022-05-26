@@ -41,7 +41,6 @@ search_tokenizer_separator: /[\s/]+/
 
 # Build settings
 remote_theme: pmarsceill/just-the-docs
-theme: "just-the-docs"
 
 compress_html:
   clippings: all
