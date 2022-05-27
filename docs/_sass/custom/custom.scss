@@ -24,7 +24,7 @@ code {
         min-width: var(--side-bar-size);
     }
 
-    .navigation-list, .site-header, .site-footer {
+    .nav-list, .site-header, .site-footer {
         width: var(--side-bar-size);
     }
     .main-content {
@@ -44,11 +44,11 @@ code {
 }
 
 @media (min-width: 31.25rem) and (min-width: 50rem) {
-    .navigation-list-item {
+    .nav-list-item {
         font-size: 32px !important;
     }
     .site-header a,
-    .navigation-list-item {
+    .nav-list-item {
         text-align: right;
     }
     
@@ -64,7 +64,7 @@ code {
         display: none;
     }
 
-    .navigation-list-link {
+    .nav-list-link {
         color: #bbb;
         font-weight: 300;
     }
