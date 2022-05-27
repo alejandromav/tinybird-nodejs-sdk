@@ -69,7 +69,15 @@ a { color: #999; }
         color: #bbb;
         font-weight: 300;
         box-sizing: content-box;
+        padding-right: 1rem;
+        padding-left: 1rem;
         line-height: 45px;
+    }
+
+    .navigation-list-link.active {
+        font-weight: 600;
+        color: #27262b;
+        text-decoration: none;
     }
 }
 
