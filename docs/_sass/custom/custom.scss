@@ -45,11 +45,11 @@ a { color: #999; }
 }
 
 @media (min-width: 31.25rem) and (min-width: 50rem) {
-    .nav-list-item {
+    .nav-list .nav-list-item {
         font-size: 32px !important;
     }
     .site-header a,
-    .nav-list-item {
+    .nav-list .nav-list-item {
         text-align: right;
     }
     
@@ -65,7 +65,7 @@ a { color: #999; }
         display: none;
     }
 
-    .nav-list-link {
+    .nav-list .nav-list-link {
         color: #bbb;
         font-weight: 300;
     }
