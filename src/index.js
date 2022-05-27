@@ -4,7 +4,9 @@ import { setConfiguration, Settings } from './stores/configuration';
 const _validateAPIToken = apiToken => {
     return apiToken
         && typeof apiToken === 'string'
-        && apiToken.length;
+        && apiToken.length
+        && apiToken.split('.').length === 3
+        && apiToken.split('.')[0] === 'p';
 };
 
 module.exports = {
