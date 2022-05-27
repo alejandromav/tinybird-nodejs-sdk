@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    --side-bar-size: 240px;
+    --side-bar-size: 290px;
 }
 
 .site-footer {
@@ -65,9 +65,11 @@ a { color: #999; }
         display: none;
     }
 
-    .nav-list .nav-list-link {
+    .nav-list .nav-list-item .nav-list-link {
         color: #bbb;
         font-weight: 300;
+        box-sizing: content-box;
+        line-height: 45px;
     }
 }
 
