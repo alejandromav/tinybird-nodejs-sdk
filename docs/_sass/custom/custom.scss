@@ -74,10 +74,11 @@ a { color: #999; }
         line-height: 45px;
     }
 
-    .navigation-list-link.active {
+    .nav-list .nav-list-item .nav-list-link.active {
         font-weight: 600;
-        color: #27262b;
         text-decoration: none;
+        background: none !important;
+        color: #27262b;
     }
 }
 
