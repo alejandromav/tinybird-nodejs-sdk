@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    --side-bar-size: 290px;
+    --side-bar-size: 264px;
 }
 
 .site-footer {
@@ -46,7 +46,7 @@ a { color: #999; }
 
 @media (min-width: 31.25rem) and (min-width: 50rem) {
     .nav-list .nav-list-item {
-        font-size: 32px !important;
+        font-size: 28px !important;
     }
     .site-header a,
     .nav-list .nav-list-item {
