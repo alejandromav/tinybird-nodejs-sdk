@@ -28,9 +28,6 @@ a { color: #999; }
     .nav-list, .site-header, .site-footer {
         width: var(--side-bar-size);
     }
-    .main-content {
-        margin-left: calc((100% - 1064px) / 2 + var(--side-bar-size));
-    }
 }
 
 @media (min-width: 50rem) {
