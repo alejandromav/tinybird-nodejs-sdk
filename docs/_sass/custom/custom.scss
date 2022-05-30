@@ -1,5 +1,3 @@
-$link-color: #1FCC83;
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700');
 
 body {
@@ -18,8 +16,6 @@ pre.highlight, figure.highlight, code {
 code {
     font-size: 14px;
 }
-
-a { color: #1FCC83; }
 
 .nav-list .nav-list-item .nav-list-link:hover, .nav-list .nav-list-item .nav-list-link.active {
     background-image: none !important;
