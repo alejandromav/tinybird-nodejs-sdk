@@ -8,5 +8,6 @@ describe('Test Query API', () => {
     it('should work when a valid SQL query is passed', async () => {
         tb.init(sampleToken);
         const result = await tb.query('select 1');
+        expect(result).to.equals(1);
     });
 });

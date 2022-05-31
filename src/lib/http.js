@@ -12,7 +12,7 @@ export const fetch = async uri => {
     });
 
     if (response.ok) {
-        return response;
+        return response.json();
     } else if (response.status === 401) {
         throw new Error(Exceptions.INVALID_API_TOKEN);
     } else if (response.status === 403) {
