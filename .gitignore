@@ -8,3 +8,4 @@ coverage
 .nyc_output
 .npmrc
 test/learn-tests.js
+.env

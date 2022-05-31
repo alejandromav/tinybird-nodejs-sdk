@@ -3,11 +3,10 @@ import tb from '../src';
 import Exceptions from '../src/lib/exceptions';
 
 describe('Test Query API', () => {
-    const sampleToken = 'p.eyJ1IjogIjk0MzI5ODI0LTMwNjktNGU5Ny05NDFmLTExN2FkM2FlMjI4MiIsICJpZCI6ICJkMTY0NjBmYy05NjBjLTQ1NGMtODcwYy1mNzk2ZTNhMjk4MzEifQ.rJqT6F2ftJ_qhO6DH6z1lyNZVITeWu4YPguXI2k6SbB';
+    const sampleToken = process.env.TEST_API_TOKEN;
 
-    it('should fail always beacuse method is not implemented yet', () => {
+    it('should work when a valid SQL query is passed', async () => {
         tb.init(sampleToken);
-        expect(() => tb.query())
-            .to.throw(Error, Exceptions.METHOD_NOT_IMPLEMENTED);
+        const result = await tb.query('select 1');
     });
 });

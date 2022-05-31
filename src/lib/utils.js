@@ -9,3 +9,6 @@ export const validateAPIToken = apiToken => {
 export const rowsToNDJSON = rows => {
     return rows.map(JSON.stringify).join('\n');
 };
+
+/* TODO: implement SQL sanitizer */
+export const sanitizeSQL = sql => sql;

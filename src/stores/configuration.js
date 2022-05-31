@@ -1,5 +1,5 @@
 const _configuration = {
-    'api-url': 'https://api.tinybird.co/'
+    'api-url': 'https://api.tinybird.co'
 };
 
 export const Settings = Object.freeze({
