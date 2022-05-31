@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import tb from '../src';
-import Exceptions from '../src/lib/exceptions';
 
 describe('Test Query API', () => {
     const sampleToken = process.env.TEST_API_TOKEN;
