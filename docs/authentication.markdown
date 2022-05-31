@@ -9,6 +9,6 @@ nav_order: 2
 You need to initialize this SDK with you API token before doing anything. You can get your on https://tinybird.co.
 
 ```js
-const tb = require('@alejandromav/tinybird-nodejs-sdk');
+const tb = require('@alejandromav/tinybird-sdk');
 tb.init('1036fae0-3a28-11ea-a5e3-...');
 ```

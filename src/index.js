@@ -1,13 +1,8 @@
 import Exceptions from './lib/exceptions';
+import { validateAPIToken } from './lib/utils';
 import { setConfiguration, Settings } from './stores/configuration';
-
-const _validateAPIToken = apiToken => {
-    return apiToken
-        && typeof apiToken === 'string'
-        && apiToken.length
-        && apiToken.split('.').length === 3
-        && apiToken.split('.')[0] === 'p';
-};
+import DatasourcesModule from './modules/datasources';
+import QueryModule from './modules/query';
 
 module.exports = {
     /**
@@ -17,12 +12,15 @@ module.exports = {
      * @param {object} options SDK options
      */
     init: (apiToken, options = {}) => {
-        if (_validateAPIToken(apiToken)) {
+        if (validateAPIToken(apiToken)) {
             setConfiguration(Settings.API_TOKEN, apiToken);
         } else {
             throw new Error(Exceptions.INVALID_API_TOKEN);
         }
 
         setConfiguration(Settings.DEBUG, !!options[Settings.DEBUG]);
-    }
+    },
+
+    ...QueryModule,
+    ...DatasourcesModule
 };
