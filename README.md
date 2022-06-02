@@ -1,4 +1,4 @@
-# Tinybird Node.js
+# Tinybird Node.js SDK
 ![](https://github.com/alejandromav/tinybird-nodejs-sdk/workflows/CI/badge.svg)
 
 ## Usage
