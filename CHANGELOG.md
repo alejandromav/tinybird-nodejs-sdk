@@ -6,15 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Add `query` method
-- Validate and sanitize SQL queries
-- More tests
-- Update docs
-- Update package name
-
-## [0.1.0] - 2022-05-31
+## [0.1.0] - 2022-06-02
 
 - Create basic project structure
+- Add `init` method
+- Add `query` method
+- Validate API tokens
+- Validate and sanitize SQL queries
 
 [Unreleased]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.1.0...HEAD
 [0.1.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/tree/0.1.0

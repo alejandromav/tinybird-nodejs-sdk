@@ -11,9 +11,11 @@ export const rowsToNDJSON = rows => {
 };
 
 export const isValidSQLQuery = sql => {
-    return sanitizeSQL(sql).indexOf('select') === 0;
+    return _formatSQL(sql).indexOf('select') === 0;
 };
 
 export const sanitizeSQL = sql => {
-    return encodeURIComponent(`select * from (${sql.toLowerCase().trim()}) format JSON`);
+    return encodeURIComponent(`select * from (${_formatSQL(sql)}) format JSON`);
 };
+
+const _formatSQL = sql => sql.toLowerCase().trim();

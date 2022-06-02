@@ -13,10 +13,10 @@ You can see more details about [authentication here](./authentication.markdown).
 ## Initialize
 ```js
 const tb = require('tinybird-sdk');
-tb.init('1036fae0-3a28-11ea-a5e3-...');
+tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 
 // You can also pass some options
-tb.init('1036fae0-3a28-11ea-a5e3-...', {
+tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...', {
     debug: true
 });
 ```

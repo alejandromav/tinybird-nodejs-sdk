@@ -36,10 +36,10 @@ Initalize SDK with API token and other options.
 ```js
 const tb = require('tinybird-sdk');
 
-tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi');
+tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 
 // You can also pass some options
-tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi', {
+tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...', {
     debug: true
 });
 ```
@@ -64,7 +64,7 @@ Query [API endpoint](https://docs.tinybird.co/api-reference/query-api.html#get--
 ```js
 const tb = require('tinybird-sdk');
 
-tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi');
+tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 
 const result = await tb.query('select 1');
 console.table(result['data']);

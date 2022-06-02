@@ -21,6 +21,9 @@ jobs:
         npm run lint --if-present
         npm run test:coverage --if-present
         npm run build
+      env:
+        CI: true
+        TEST_API_TOKEN: ${{secrets.TEST_API_TOKEN}}
     - name: npm publish
       run: |
         npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
@@ -28,3 +31,4 @@ jobs:
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        TEST_API_TOKEN: ${{secrets.TEST_API_TOKEN}}

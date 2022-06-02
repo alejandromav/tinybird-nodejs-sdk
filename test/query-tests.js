@@ -9,7 +9,7 @@ describe('Test Query API', () => {
         try {
             tb.init(sampleToken);
             const result = await tb.query('select 1');
-            expect(result).to.equals(1);
+            expect(result['data'][0]['1']).to.equals(1);
         } catch (error) {
             console.log(error)
             expect(error).to.be.null;
