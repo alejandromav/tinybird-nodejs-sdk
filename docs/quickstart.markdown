@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Quickstart
-nav_order: 3
+nav_order: 2
 ---
 
 # Quickstart
@@ -12,7 +12,7 @@ You can see more details about [authentication here](./authentication.markdown).
 
 ## Initialize
 ```js
-const tb = require('@alejandromav/tinybird-sdk');
+const tb = require('tinybird-sdk');
 tb.init('1036fae0-3a28-11ea-a5e3-...');
 
 // You can also pass some options

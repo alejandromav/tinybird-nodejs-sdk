@@ -13,7 +13,7 @@ This is the Node.js SDK for [https://tinybird.co](https://tinybird.co).
 ## Installation
 
 ```bash
-npm i @alejandromav/tinybird-sdk
+npm i tinybird-sdk
 ```
 
 ## Usage

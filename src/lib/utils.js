@@ -10,5 +10,10 @@ export const rowsToNDJSON = rows => {
     return rows.map(JSON.stringify).join('\n');
 };
 
-/* TODO: implement SQL sanitizer */
-export const sanitizeSQL = sql => sql;
+export const isValidSQLQuery = sql => {
+    return sanitizeSQL(sql).indexOf('select') === 0;
+};
+
+export const sanitizeSQL = sql => {
+    return encodeURIComponent(`select * from (${sql.toLowerCase().trim()}) format JSON`);
+};

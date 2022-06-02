@@ -3,12 +3,16 @@ import { getConfiguration, Settings } from '../stores/configuration';
 import Exceptions from './exceptions';
 import { getLogger } from '../lib/logger';
 const logger = getLogger('query-module');
+import pjson from '../../package.json';
 
-export const fetch = async uri => {
+export const fetch = async (uri, options) => {
     const response = await f(`${getConfiguration(Settings.API_URL)}${uri}`, {
         headers: {
-            'Authorization': `Bearer ${getConfiguration(Settings.API_TOKEN)}`
-        }
+            'Authorization': `Bearer ${getConfiguration(Settings.API_TOKEN)}`,
+            'Accept': 'application/json',
+            'User-Agent': `tinybird-node-sdk@${pjson['version']}`
+        },
+        ...options
     });
 
     if (response.ok) {

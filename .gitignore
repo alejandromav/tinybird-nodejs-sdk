@@ -9,3 +9,4 @@ coverage
 .npmrc
 test/learn-tests.js
 .env
+try.js

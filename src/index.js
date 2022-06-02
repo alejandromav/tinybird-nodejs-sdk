@@ -8,8 +8,8 @@ module.exports = {
     /**
      * Initialize SchemaDB SDK.
      * 
-     * @param {string} apiToken SchemaDB API Token
-     * @param {object} options SDK options
+     * @param { String } apiToken SchemaDB API Token
+     * @param { Object } options SDK options
      */
     init: (apiToken, options = {}) => {
         if (validateAPIToken(apiToken)) {
