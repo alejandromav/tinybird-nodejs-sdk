@@ -27,7 +27,7 @@ Initalize SDK with API token and other options.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| token | `String` | [Tinybird API token](https://docs.tinybird.co/main-concepts.html#auth-tokens-title)] |
+| token | `String` | [Tinybird API token](https://docs.tinybird.co/main-concepts.html#auth-tokens-title) |
 | options.debug | `Boolean` | flag for setting log level to debug |
 
 #### Example

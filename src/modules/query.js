@@ -12,17 +12,16 @@ module.exports = {
      * @return { Object } resultset rows
      */
     query: async sql => {
-        let sanitizedQuery;
         try {
             if (!isValidSQLQuery(sql)) {
                 throw new Error(Exceptions.INVALID_SQL_QUERY);
             }
 
-            sanitizedQuery = sanitizeSQL(sql);
-            return fetch(`/v0/sql?q=${sanitizedQuery}`);
+            return fetch(`/v0/sql?q=${sanitizeSQL(sql)}`);
         } catch (error) {
             logger.error('Error while fetching /v0/sql');
-            logger.debug(`Query: ${sanitizedQuery}`);
+            logger.debug(`Request: /v0/sql?q=${sanitizeSQL(sql)}`);
+            logger.debug(`Query: ${sql}`);
             logger.debug(error);
         }
     }

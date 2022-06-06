@@ -16,11 +16,19 @@ export const fetch = async (uri, options) => {
     });
 
     if (response.ok) {
-        return response.json();
+        const responseIsJSON =
+            response.headers.raw()['content-type']
+            && response.headers.raw()['content-type'][0] === 'application/json; charset=UTF-8';
+
+        return responseIsJSON ? response.json() : response.text();
+    } else if (response.status === 400) {
+        throw new Error(Exceptions.BAD_REQUEST);
     } else if (response.status === 401) {
         throw new Error(Exceptions.INVALID_API_TOKEN);
     } else if (response.status === 403) {
         throw new Error(Exceptions.INSUFFICIENT_PERMISSIONS);
+    } else if (response.status === 404) {
+        throw new Error(Exceptions.NOT_FOUND);
     } else {
         logger.debug(response);
         throw new Error(response.statusText);

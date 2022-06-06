@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add `createDatasource`
+- Add `getAllDatasources`
+- Add `getDatasource`
+- Add `dropDatasource`
+
 ## [0.1.0] - 2022-06-02
 
 - Create basic project structure

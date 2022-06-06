@@ -11,19 +11,16 @@ describe('Test Query API', () => {
             const result = await tb.query('select 1');
             expect(result['data'][0]['1']).to.equals(1);
         } catch (error) {
-            console.log(error)
             expect(error).to.be.null;
         }
     });
 
     it('should fail when invalid SQL query is passed', async () => {
-        let err;
         try {
             tb.init(sampleToken);
             await tb.query('drop database')
         } catch (error) {
-            err = error;
-            expect(error).to.be(Exceptions.INVALID_SQL_QUERY);
+            expect(error.message).to.eq(Exceptions.INVALID_SQL_QUERY);
         }
     });
 });
