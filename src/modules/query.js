@@ -9,7 +9,7 @@ module.exports = {
      * Execute SQL query
      * 
      * @param  { String } sql SQL Query
-     * @return { Object } resultset rows
+     * @return { Object } Resultset rows
      */
     query: async sql => {
         try {
@@ -17,7 +17,7 @@ module.exports = {
                 throw new Error(Exceptions.INVALID_SQL_QUERY);
             }
 
-            return fetch(`/v0/sql?q=${sanitizeSQL(sql)}`);
+            return await fetch(`/v0/sql?q=${sanitizeSQL(sql)}`);
         } catch (error) {
             logger.error('Error while fetching /v0/sql');
             logger.debug(`Request: /v0/sql?q=${sanitizeSQL(sql)}`);

@@ -21,6 +21,22 @@ code {
     background-image: none !important;
 }
 
+// Using numbers instead of bullets for listing
+#markdown-toc ::before {
+    display: none;
+}
+
+#markdown-toc {
+    padding: 1.5em;
+    list-style: decimal;
+    display: inline-block;
+}
+
+#markdown-toc ul,
+#markdown-toc ol {
+    list-style: circle;
+}
+
 @media (min-width: 66.5rem) {
     .side-bar {
         width: calc((100% - 1064px) / 2 + var(--side-bar-size));

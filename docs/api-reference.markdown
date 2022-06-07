@@ -5,6 +5,7 @@ nav_order: 4
 ---
 
 # API Reference
+{: .no_toc }
 
 ## Navigation Structure
 {: .no_toc }
@@ -17,7 +18,10 @@ nav_order: 4
 
 ---------------
 
-## `init(token, options) => Undefined`
+## Setup
+{:toc}
+
+### `init(token, options) => Undefined`
 {:toc}
 
 Initalize SDK with API token and other options.
@@ -46,7 +50,10 @@ tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...', {
 
 ---------------
 
-## `query(sql) => Promise<Object>`
+## Query
+{:toc}
+
+### `query(sql) => Promise<Object>`
 {:toc}
 
 Query [API endpoint](https://docs.tinybird.co/api-reference/query-api.html#get--v0-sql-title) and get resulting rows.
@@ -69,3 +76,14 @@ tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 const result = await tb.query('select 1');
 console.table(result['data']);
 ```
+
+---------------
+
+## Datasources
+{:toc}
+
+
+---------------
+
+## Pipes
+{:toc}

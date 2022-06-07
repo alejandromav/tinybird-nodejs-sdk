@@ -4,36 +4,58 @@ import { fetch } from '../lib/http';
 import Exceptions from '../lib/exceptions';
 
 module.exports = {
-    getAllDatasources: () => {
+    /**
+     * Get all datasources
+     * 
+     * @return { Object } All datasources available
+     */
+    getAllDatasources: async () => {
         try {
-            return fetch('/v0/datasources');
+            return await fetch('/v0/datasources');
         } catch (error) {
             logger.error('Error while fetching /v0/datasources');
             logger.debug('Request: /v0/datasources/');
             logger.debug(error);
         }
     },
-    getDatasource: name => {
+
+    /**
+     * Get datasource detail by name
+     * 
+     * @param  { String } name Datasource name
+     * @return { Object } Datasource details
+     */
+    getDatasource: async name => {
         try {
-            return fetch(`/v0/datasources/${name}`);
+            return await fetch(`/v0/datasources/${name}`);
         } catch (error) {
             logger.error('Error while fetching /v0/datasources');
             logger.debug(`Request: /v0/datasources/${name}`);
             logger.debug(error);
         }
     },
-    createDatasource: (name, schema) => {
+
+    /**
+     * Create new datasource
+     * 
+     * @param  { String } name Datasource name
+     * @param  { String } schema Datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
+     * @return { Object } Datasource details
+     */
+    createDatasource: async (name, schema) => {
         try {
             const params = new URLSearchParams();
             params.append('name', name);
             params.append('schema', schema);
 
-            return fetch('/v0/datasources', {
+            const result = await fetch('/v0/datasources', {
                 method: 'POST',
                 body: params
             });
+            logger.debug(`Datasource created: ${name}`);
+            return result;
         } catch (error) {
-            logger.error('Error while fetching /v0/datasources');
+            logger.error(`Error while creating datarource ${name}`);
             logger.debug('Request: /v0/datasources/');
             logger.debug(error);
         }
@@ -47,13 +69,22 @@ module.exports = {
     truncateDatasource: () => {
         throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
     },
-    dropDatasource: name => {
+
+    /**
+     * Drop (delete) datasource by name
+     * 
+     * @param  { String } name Datasource name
+     * @return { Undefined }
+     */
+    dropDatasource: async name => {
         try {
-            return fetch(`/v0/datasources/${name}`, {
+            const result = await fetch(`/v0/datasources/${name}`, {
                 method: 'DELETE'
             });
+            logger.debug(`Datasource deleted: ${name}`);
+            return result;
         } catch (error) {
-            logger.error('Error while fetching /v0/datasources');
+            logger.error(`Error while deleting ${name}`);
             logger.debug(`Request: /v0/datasources/${name}`);
             logger.debug(error);
         }
