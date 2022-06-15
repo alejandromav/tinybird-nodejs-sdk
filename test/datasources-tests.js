@@ -30,7 +30,24 @@ describe('Test Query API', () => {
 
             expect(result['operations']).deep.to.equals([ 'ADD COLUMN `foo` String' ]);
         } catch (error) {
-            console.log(error);
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should rename datasource', async () => {
+        try {
+            const newName = `${datasourceName}_new`;
+
+            // Rename to new name
+            await tb.renameDatasource(datasourceName, newName);
+            let renamedDatasource = await tb.getDatasource(newName);
+            expect(renamedDatasource['name']).to.equals(newName);
+
+            // Revert to old name
+            await tb.renameDatasource(newName, datasourceName);
+            renamedDatasource = await tb.getDatasource(datasourceName);
+            expect(renamedDatasource['name']).to.equals(datasourceName);
+        } catch (error) {
             expect(error).to.be.null;
         }
     });

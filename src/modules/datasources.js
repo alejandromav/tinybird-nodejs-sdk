@@ -66,7 +66,7 @@ module.exports = {
      * 
      * @param  { String } name Datasource name
      * @param  { String } schema New datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
-     * @return { Object } Datasource details
+     * @return { Object } Performed alter operations
      */
     alterDatasource: async (name, schema) => {
         try {
@@ -86,8 +86,31 @@ module.exports = {
             logger.debug(error);
         }
     },
-    renameDatasource: () => {
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+
+    /**
+     * Rename datasource
+     * 
+     * @param  { String } name Datasource name
+     * @param  { String } newName New datasource name
+     * @return { Object } Datasource details
+     */
+    renameDatasource: async (name, newName) => {
+        try {
+            const params = new URLSearchParams();
+            params.append('name', newName);
+
+            const result = await fetch(`/v0/datasources/${name}`, {
+                method: 'PUT',
+                body: params
+            });
+
+            logger.debug(`Datasource ${name} renamed to ${newName}`);
+            return result;
+        } catch (error) {
+            logger.error(`Error while renaming datarource ${name} to ${newName}`);
+            logger.debug('Request: /v0/datasources/(.+)');
+            logger.debug(error);
+        }
     },
     truncateDatasource: () => {
         throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
