@@ -33,6 +33,7 @@ Initalize SDK with API token and other options.
 | ---- | ---- | ----------- |
 | token | `String` | [Tinybird API token](https://docs.tinybird.co/main-concepts.html#auth-tokens-title) |
 | options.debug | `Boolean` | flag for setting log level to debug |
+| options.'api-url' | `String` | Custom tenant url. Defaults to https://api.tinybird.co |
 
 #### Example
 {: .no_toc }
@@ -45,6 +46,11 @@ tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 // You can also pass some options
 tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...', {
     debug: true
+});
+
+// If you have a custom installation
+tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...', {
+    'api-url': 'https://my-tenant.tinybird.co'
 });
 ```
 

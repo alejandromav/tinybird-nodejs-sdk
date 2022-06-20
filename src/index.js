@@ -6,9 +6,9 @@ import QueryModule from './modules/query';
 
 module.exports = {
     /**
-     * Initialize SchemaDB SDK.
+     * Initialize Tinybird SDK.
      * 
-     * @param { String } apiToken SchemaDB API Token
+     * @param { String } apiToken Tinybird API Token
      * @param { Object } options SDK options
      */
     init: (apiToken, options = {}) => {
@@ -16,6 +16,11 @@ module.exports = {
             setConfiguration(Settings.API_TOKEN, apiToken);
         } else {
             throw new Error(Exceptions.INVALID_API_TOKEN);
+        }
+
+        // Support custom tenants
+        if (validateAPIToken(options[Settings.API_URL])) {
+            setConfiguration(Settings.API_URL, options[Settings.API_URL]);
         }
 
         setConfiguration(Settings.DEBUG, !!options[Settings.DEBUG]);
