@@ -7,12 +7,13 @@ import pjson from '../../package.json';
 
 export const fetch = async (uri, options = {}) => {
     const response = await f(`${getConfiguration(Settings.API_URL)}${uri}`, {
+        ...options,
         headers: {
             'Authorization': `Bearer ${getConfiguration(Settings.API_TOKEN)}`,
             'Accept': 'application/json',
-            'User-Agent': `tinybird-node-sdk@${pjson['version']}`
-        },
-        ...options
+            'User-Agent': `tinybird-node-sdk@${pjson['version']}`,
+            ...options['headers']
+        }
     });
 
     if (response.ok) {

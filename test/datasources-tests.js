@@ -12,7 +12,7 @@ describe('Test Query API', () => {
         try {
             const result = await tb.createDatasource(
                 datasourceName,
-                'ts DateTime'
+                'name String, profession String'
             );
 
             expect(result['datasource']['name']).to.equals(datasourceName);
@@ -25,10 +25,10 @@ describe('Test Query API', () => {
         try {
             const result = await tb.alterDatasource(
                 datasourceName,
-                'ts DateTime, foo String'
+                'name String, profession String, age UInt16'
             );
 
-            expect(result['operations']).deep.to.equals([ 'ADD COLUMN `foo` String' ]);
+            expect(result['operations']).deep.to.equals([ 'ADD COLUMN `age` UInt16' ]);
         } catch (error) {
             expect(error).to.be.null;
         }
@@ -47,6 +47,26 @@ describe('Test Query API', () => {
             await tb.renameDatasource(newName, datasourceName);
             renamedDatasource = await tb.getDatasource(datasourceName);
             expect(renamedDatasource['name']).to.equals(datasourceName);
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should append new files to datasource', async () => {
+        try {
+            const rows = [
+                { name: 'Han',    profession: 'Smuggler', age: 30 },
+                { name: 'Luke',   profession: 'Hero',     age: 32 },
+                { name: 'Leia',   profession: 'Princess', age: 32 },
+                { name: 'Anakin', profession: 'Jedi',     age: 50 },
+                { name: 'Obi',    profession: 'Jedi',     age: 65 },
+                { name: 'Chewie', profession: 'Smuggler', age: 30 },
+                { name: 'Lando',  profession: 'Smuggler', age: 50 }
+            ];
+
+            const result = await tb.appendRows(datasourceName, rows);
+
+            expect(result).to.equals(true);
         } catch (error) {
             expect(error).to.be.null;
         }

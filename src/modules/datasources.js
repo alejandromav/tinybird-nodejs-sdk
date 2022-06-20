@@ -2,6 +2,7 @@ import { getLogger } from '../lib/logger';
 const logger = getLogger('datasources-module');
 import { fetch } from '../lib/http';
 import Exceptions from '../lib/exceptions';
+import { rowsToCSV } from '../lib/utils';
 
 module.exports = {
     /**
@@ -55,7 +56,7 @@ module.exports = {
             logger.debug(`Datasource created: ${name}`);
             return result;
         } catch (error) {
-            logger.error(`Error while creating datarource ${name}`);
+            logger.error(`Error while creating datasource ${name}`);
             logger.debug('Request: /v0/datasources/');
             logger.debug(error);
         }
@@ -81,7 +82,7 @@ module.exports = {
             logger.debug(`Datasource altered: ${name}, new schema: ${schema}`);
             return result;
         } catch (error) {
-            logger.error(`Error while altering datarource ${name} with schema: ${schema}`);
+            logger.error(`Error while altering datasource ${name} with schema: ${schema}`);
             logger.debug('Request: /v0/datasources/(.+)/alter');
             logger.debug(error);
         }
@@ -107,41 +108,64 @@ module.exports = {
             logger.debug(`Datasource ${name} renamed to ${newName}`);
             return result;
         } catch (error) {
-            logger.error(`Error while renaming datarource ${name} to ${newName}`);
+            logger.error(`Error while renaming datasource ${name} to ${newName}`);
             logger.debug('Request: /v0/datasources/(.+)');
             logger.debug(error);
         }
-    },
-    truncateDatasource: () => {
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
     },
 
     /**
      * Drop (delete) datasource by name
      * 
      * @param  { String } name Datasource name
-     * @return { Undefined }
+     * @return { Boolean } Result as boolean
      */
     dropDatasource: async name => {
         try {
-            const result = await fetch(`/v0/datasources/${name}`, {
+            await fetch(`/v0/datasources/${name}`, {
                 method: 'DELETE'
             });
             logger.debug(`Datasource deleted: ${name}`);
-            return result;
+            return true;
         } catch (error) {
             logger.error(`Error while deleting ${name}`);
             logger.debug(`Request: /v0/datasources/${name}`);
             logger.debug(error);
         }
     },
-    appendRows: () => {
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+
+    /**
+     * Append row to existing datasource
+     * 
+     * @param  { String } name Datasource name
+     * @param  { Object } rows Rows to append
+     * @return { Boolean } Result as boolean
+     */
+    appendRows: async (name, rows) => {
+        try {
+            const result = await fetch(`/v0/datasources?name=${name}&format=csv&mode=append&dialect_delimiter=,`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/csv;charset=utf-8',
+                },
+                body: await rowsToCSV(rows)
+            });
+
+            logger.debug(`Rows appended to ${name}: ${rows.length}`);
+            return result['error'] === false;
+        } catch (error) {
+            logger.error(`Error while appending rows to datasource ${name}`);
+            logger.debug('Request: /v0/datasources/(.+)');
+            logger.debug(error);
+        }
     },
     appendFile: () => {
         throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
     },
     deleteRows: () => {
+        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+    },
+    truncateDatasource: () => {
         throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
     },
     /* Experimental */

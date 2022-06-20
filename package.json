@@ -41,6 +41,7 @@
         "nyc": "^15.1.0"
     },
     "dependencies": {
+        "json-2-csv": "^3.17.1",
         "log4js": "^6.5.1",
         "node-fetch": "^2.6.7"
     }

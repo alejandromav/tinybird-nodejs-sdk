@@ -1,3 +1,5 @@
+import { json2csvAsync } from 'json-2-csv';
+
 export const validateAPIToken = apiToken => {
     return apiToken
         && typeof apiToken === 'string'
@@ -8,6 +10,10 @@ export const validateAPIToken = apiToken => {
 
 export const rowsToNDJSON = rows => {
     return rows.map(JSON.stringify).join('\n');
+};
+
+export const rowsToCSV = rows => {
+    return json2csvAsync(rows, { prependHeader: false });
 };
 
 export const isValidSQLQuery = sql => {
