@@ -6,7 +6,7 @@ nav_order: 3
 
 # Authentication
 
-You need to initialize this SDK with you API token before doing anything. You can get your on https://tinybird.co.
+You need to initialize this SDK with you API token before doing anything. You can get your on [https://tinybird.co](https://tinybird.co).
 
 ```js
 const tb = require('tinybird-sdk');
