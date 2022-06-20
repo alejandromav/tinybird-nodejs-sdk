@@ -162,12 +162,45 @@ module.exports = {
     appendFile: () => {
         throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
     },
-    deleteRows: () => {
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+    deleteRows: async (name, condition) => {
+        try {
+            const params = new URLSearchParams();
+            params.append('delete_condition', `(${condition})`);
+
+            await fetch(`/v0/datasources/${name}/delete`, {
+                method: 'POST',
+                body: params
+            });
+
+            logger.debug(`Deleted rows from datasource ${name}`);
+            return true;
+        } catch (error) {
+            logger.error(`Error while deleting rows from datasource ${name}`);
+            logger.debug(`Request: /v0/datasources/${name}/delete`);
+            logger.debug(error);
+        }
     },
-    truncateDatasource: () => {
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+
+    /**
+     * Truncate datasource by name
+     * 
+     * @param  { String } name Datasource name
+     * @return { Boolean } Result as boolean
+     */
+    truncateDatasource: async name => {
+        try {
+            await fetch(`/v0/datasources/${name}/truncate`, {
+                method: 'POST'
+            });
+            logger.debug(`Datasource truncated: ${name}`);
+            return true;
+        } catch (error) {
+            logger.error(`Error while truncating ${name}`);
+            logger.debug(`Request: /v0/datasources/${name}/truncate`);
+            logger.debug(error);
+        }
     },
+
     /* Experimental */
     sendEvents: () => {
         throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);

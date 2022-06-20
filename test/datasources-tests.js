@@ -72,6 +72,34 @@ describe('Test Query API', () => {
         }
     });
 
+    it('should delete specific rows from valid populated datasource', async () => {
+        try {
+            await tb.deleteRows(datasourceName, 'profession = \'Jedi\'');
+
+            const result = await tb.query(`select * from ${datasourceName} where profession = 'Jedi'`);
+            const characters = result['data'];
+
+            expect(characters.length).to.eq(0);
+        } catch (error) {
+            console.log(error)
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should truncate a valid datasource', async () => {
+        try {
+            await tb.truncateDatasource(datasourceName);
+
+            const result = await tb.query(`select * from ${datasourceName}`);
+            const characters = result['data'];
+
+            expect(characters.length).to.eq(0);
+        } catch (error) {
+            console.log(error)
+            expect(error).to.be.null;
+        }
+    });
+
     it('should delete a valid datasource', async () => {
         try {
             await tb.dropDatasource(datasourceName);
