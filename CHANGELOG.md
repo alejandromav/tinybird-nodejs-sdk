@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.2.0] - 2022-06-20
+
 - Add `createDatasource`
 - Add `getAllDatasources`
 - Add `getDatasource`
@@ -25,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Validate API tokens
 - Validate and sanitize SQL queries
 
-[Unreleased]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/tree/0.1.0
-<!-- [1.1.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/1.0.0...1.1.0
-[1.0.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/tree/1.0.0 -->
