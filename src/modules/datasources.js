@@ -3,6 +3,8 @@ const logger = getLogger('datasources-module');
 import { fetch } from '../lib/http';
 import Exceptions from '../lib/exceptions';
 import { rowsToCSV } from '../lib/utils';
+import FormData from 'form-data';
+const fs = require('fs');
 
 module.exports = {
     /**
@@ -159,9 +161,43 @@ module.exports = {
             logger.debug(error);
         }
     },
-    appendFile: () => {
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+
+    /**
+     * Append data file to existing datasource
+     * 
+     * @param  { String } name Datasource name
+     * @param  { Object } filePath Path to file
+     * @return { Boolean } Result as boolean
+     */
+    appendFile: async (name, filePath) => {
+        try {
+            const form = new FormData();
+            const stats = fs.statSync(filePath);
+            const fileSizeInBytes = stats.size;
+            const fileStream = fs.createReadStream(filePath);
+            form.append('csv', fileStream, { knownLength: fileSizeInBytes });
+
+            const result = await fetch(`/v0/datasources?name=${name}&format=csv&mode=append&dialect_delimiter=,`, {
+                method: 'POST',
+                body: form
+            });
+
+            logger.debug(`Rows appended to ${name} from file ${filePath}`);
+            return result['error'] === false;
+        } catch (error) {
+            logger.error(`Error while appending file ${filePath} to datasource ${name}`);
+            logger.debug('Request: /v0/datasources/(.+)');
+            logger.debug(error);
+        }
     },
+
+    /**
+     * Delete specific rows from datasource usign a filter condition
+     * 
+     * @param  { String } name Datasource name
+     * @param  { String } condition Filter condition
+     * @return { Boolean } Result as boolean
+     */
     deleteRows: async (name, condition) => {
         try {
             const params = new URLSearchParams();

@@ -2,11 +2,16 @@ import { expect } from 'chai';
 import tb from '../src';
 import Exceptions from '../src/lib/exceptions';
 import { randomUUID } from 'crypto';
+import path from 'path';
 
-describe('Test Query API', () => {
+describe('Test Datasources API', () => {
     const sampleToken = process.env.TEST_API_TOKEN;
     const datasourceName = 'test_' + randomUUID().split('-').join('_');
-    tb.init(sampleToken);
+
+    before(done => {
+        tb.init(sampleToken);
+        done();
+    });
 
     it('should create a new valid datasource', async () => {
         try {
@@ -52,21 +57,56 @@ describe('Test Query API', () => {
         }
     });
 
-    it('should append new files to datasource', async () => {
+    it('should append new rows to datasource', async () => {
         try {
             const rows = [
                 { name: 'Han',    profession: 'Smuggler', age: 30 },
                 { name: 'Luke',   profession: 'Hero',     age: 32 },
                 { name: 'Leia',   profession: 'Princess', age: 32 },
                 { name: 'Anakin', profession: 'Jedi',     age: 50 },
-                { name: 'Obi',    profession: 'Jedi',     age: 65 },
-                { name: 'Chewie', profession: 'Smuggler', age: 30 },
-                { name: 'Lando',  profession: 'Smuggler', age: 50 }
+                { name: 'Obi',    profession: 'Jedi',     age: 65 }
             ];
 
             const result = await tb.appendRows(datasourceName, rows);
 
             expect(result).to.equals(true);
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should append new rows from file to datasource', async () => {
+        try {
+            const filePath = path.join(__dirname, './fixtures/characters.csv')
+            const result = await tb.appendFile(datasourceName, filePath);
+
+            expect(result).to.equals(true);
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should append a large file to datasource', async () => {
+        try {
+            const newName = `${datasourceName}_large`;
+            await tb.createDatasource(
+                datasourceName,
+                'symbol String, date Date, open Float32, high Float32, low Float32, close Float32, close_adjusted Float32, volume Int64, split_coefficient Float32'
+            );
+
+            const filePath = path.join(__dirname, './fixtures/stock_prices_1M.csv')
+            const result = await tb.appendFile(newName, filePath);
+
+            expect(result).to.equals(true);
+
+            await tb.dropDatasource(newName);
+
+            // Check datasource doesn't exist anymore
+            try {
+                await tb.getDatasource(newName);
+            } catch (error) {
+                expect(error.message).to.eq(Exceptions.NOT_FOUND);
+            }
         } catch (error) {
             expect(error).to.be.null;
         }

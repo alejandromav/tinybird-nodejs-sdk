@@ -4,9 +4,9 @@
     "description": "Tinybird Node.js SDK",
     "main": "dist/index.js",
     "scripts": {
-        "test": "mocha --require @babel/register",
-        "test:coverage": "nyc --reporter=html mocha --require @babel/register",
-        "test:watch": "mocha --require @babel/register -w",
+        "test": "mocha --timeout 60000 --require @babel/register",
+        "test:coverage": "nyc --reporter=html mocha --timeout 60000 --require @babel/register",
+        "test:watch": "mocha --timeout 60000 --require @babel/register -w",
         "lint": "eslint -c .eslintrc.yml src/**",
         "build": "babel src --out-dir dist",
         "prepublishOnly": "npm run build"
@@ -41,6 +41,7 @@
         "nyc": "^15.1.0"
     },
     "dependencies": {
+        "form-data": "^4.0.0",
         "json-2-csv": "^3.17.1",
         "log4js": "^6.5.1",
         "node-fetch": "^2.6.7"

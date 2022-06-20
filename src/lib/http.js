@@ -2,7 +2,7 @@ import f from 'node-fetch';
 import { getConfiguration, Settings } from '../stores/configuration';
 import Exceptions from './exceptions';
 import { getLogger } from '../lib/logger';
-const logger = getLogger('query-module');
+const logger = getLogger('http-module');
 import pjson from '../../package.json';
 
 export const fetch = async (uri, options = {}) => {
