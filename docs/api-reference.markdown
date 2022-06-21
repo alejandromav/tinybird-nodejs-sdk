@@ -39,7 +39,7 @@ Initalize SDK with API token and other options.
 {: .no_toc }
 
 ```js
-const tb = require('tinybird-sdk');
+import tb from 'tinybird-sdk';);
 
 tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 
@@ -75,7 +75,7 @@ Query [API endpoint](https://docs.tinybird.co/api-reference/query-api.html#get--
 {: .no_toc }
 
 ```js
-const tb = require('tinybird-sdk');
+import tb from 'tinybird-sdk';
 
 tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 

@@ -4,12 +4,15 @@ import { fetch } from '../lib/http';
 import { sanitizeSQL, isValidSQLQuery } from '../lib/utils';
 import Exceptions from '../lib/exceptions';
 
-module.exports = {
+/**
+ * @module tinybird-sdk/query
+ */
+export default {
     /**
      * Execute SQL query
      * 
      * @param  { string } sql SQL Query
-     * @return { object } Resultset rows
+     * @return { Promise<object> } Resultset rows
      */
     query: async sql => {
         try {

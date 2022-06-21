@@ -4,13 +4,16 @@ import { fetch } from '../lib/http';
 import Exceptions from '../lib/exceptions';
 import { rowsToCSV } from '../lib/utils';
 import FormData from 'form-data';
-const fs = require('fs');
+import fs from 'fs';
 
-module.exports = {
+/**
+ * @module tinybird-sdk/datasources
+ */
+export default {
     /**
      * Get all datasources
      * 
-     * @return { object } All datasources available
+     * @return { Promise<object> } All datasources available
      */
     getAllDatasources: async () => {
         try {
@@ -26,7 +29,7 @@ module.exports = {
      * Get datasource detail by name
      * 
      * @param  { string } name Datasource name
-     * @return { object } Datasource details
+     * @return { Promise<object> } Datasource details
      */
     getDatasource: async name => {
         try {
@@ -43,7 +46,7 @@ module.exports = {
      * 
      * @param  { string } name Datasource name
      * @param  { string } schema Datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
-     * @return { object } Datasource details
+     * @return { Promise<object> } Datasource details
      */
     createDatasource: async (name, schema) => {
         try {
@@ -69,7 +72,7 @@ module.exports = {
      * 
      * @param  { string } name Datasource name
      * @param  { string } schema New datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
-     * @return { object } Performed alter operations
+     * @return { Promise<object> } Performed alter operations
      */
     alterDatasource: async (name, schema) => {
         try {
@@ -95,7 +98,7 @@ module.exports = {
      * 
      * @param  { string } name Datasource name
      * @param  { string } newName New datasource name
-     * @return { object } Datasource details
+     * @return { Promise<object> } Datasource details
      */
     renameDatasource: async (name, newName) => {
         try {
@@ -120,7 +123,7 @@ module.exports = {
      * Drop (delete) datasource by name
      * 
      * @param  { string } name Datasource name
-     * @return { boolean } Result as boolean
+     * @return { Promise<boolean> } Result as boolean
      */
     dropDatasource: async name => {
         try {
@@ -141,7 +144,7 @@ module.exports = {
      * 
      * @param  { string } name Datasource name
      * @param  { object } rows Rows to append
-     * @return { boolean } Result as boolean
+     * @return { Promise<boolean> } Result as boolean
      */
     appendRows: async (name, rows) => {
         try {
@@ -167,7 +170,7 @@ module.exports = {
      * 
      * @param  { string } name Datasource name
      * @param  { object } filePath Path to file
-     * @return { boolean } Result as boolean
+     * @return { Promise<boolean> } Result as boolean
      */
     appendFile: async (name, filePath) => {
         try {
@@ -196,7 +199,7 @@ module.exports = {
      * 
      * @param  { string } name Datasource name
      * @param  { string } condition Filter condition
-     * @return { boolean } Result as boolean
+     * @return { Promise<boolean> } Result as boolean
      */
     deleteRows: async (name, condition) => {
         try {
@@ -221,7 +224,7 @@ module.exports = {
      * Truncate datasource by name
      * 
      * @param  { string } name Datasource name
-     * @return { boolean } Result as boolean
+     * @return { Promise<boolean> } Result as boolean
      */
     truncateDatasource: async name => {
         try {

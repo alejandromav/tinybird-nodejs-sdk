@@ -10,7 +10,7 @@ Query existing Pipes with this method:
 
 ```js
 // Initialize sdk
-const tb = require('tinybird-sdk');
+import tb from 'tinybird-sdk';
 tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 
 // Query pipe

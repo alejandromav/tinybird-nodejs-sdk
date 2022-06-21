@@ -2,14 +2,17 @@ import { fetch } from '../lib/http';
 import { getLogger } from '../lib/logger';
 const logger = getLogger('pipes-module');
 
-module.exports = {
+/**
+ * @module tinybird-sdk/pipes
+ */
+export default {
     /**
      * Query Pipe with optional parameters
      * 
      * @param  { string } pipeName Pipe name
      * @param  { object } [params={}] Parameters
      * @param  { string } [format=json] Result format. One of: json, csv, ndjson, parquet.
-     * @return { object } Resultset rows
+     * @return { Promise<object> } Resultset rows
      */
     queryPipe: async (pipeName, params={}, format='json') => {
         let queryString = '';

@@ -2,8 +2,10 @@
     "comments": false,
     "presets": [
         ["@babel/preset-env", {
-            "targets": { "node": "18" }
+            "targets": { "node": "18" },
+            "modules": "commonjs"
         }],
         "minify"
-    ]
+    ],
+    "plugins": ["add-module-exports"]
 }

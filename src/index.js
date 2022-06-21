@@ -5,14 +5,17 @@ import DatasourcesModule from './modules/datasources';
 import QueryModule from './modules/query';
 import PipesModule from './modules/pipes';
 
-module.exports = {
+/**
+ * @module tinybird-sdk
+ */
+export default {
     /**
      * Initialize Tinybird SDK.
      * 
      * @param { string } apiToken Tinybird API Token
      * @param { object } [options] SDK options
      * @param { boolean } [options.debug=false] Flag for debug logging
-     * @param { string } [options.apiUrl=https://api.tinybird.co] Base url for custom installations
+     * @param { string } [options.apiUrl='https://api.tinybird.co'] Base url for custom installations
      */
     init: (apiToken, options = {}) => {
         if (validateAPIToken(apiToken)) {
