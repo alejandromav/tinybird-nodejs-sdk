@@ -10,7 +10,7 @@ module.exports = {
     /**
      * Get all datasources
      * 
-     * @return { Object } All datasources available
+     * @return { object } All datasources available
      */
     getAllDatasources: async () => {
         try {
@@ -25,8 +25,8 @@ module.exports = {
     /**
      * Get datasource detail by name
      * 
-     * @param  { String } name Datasource name
-     * @return { Object } Datasource details
+     * @param  { string } name Datasource name
+     * @return { object } Datasource details
      */
     getDatasource: async name => {
         try {
@@ -41,9 +41,9 @@ module.exports = {
     /**
      * Create new datasource
      * 
-     * @param  { String } name Datasource name
-     * @param  { String } schema Datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
-     * @return { Object } Datasource details
+     * @param  { string } name Datasource name
+     * @param  { string } schema Datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
+     * @return { object } Datasource details
      */
     createDatasource: async (name, schema) => {
         try {
@@ -67,9 +67,9 @@ module.exports = {
     /**
      * Alter existing datasource schema
      * 
-     * @param  { String } name Datasource name
-     * @param  { String } schema New datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
-     * @return { Object } Performed alter operations
+     * @param  { string } name Datasource name
+     * @param  { string } schema New datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
+     * @return { object } Performed alter operations
      */
     alterDatasource: async (name, schema) => {
         try {
@@ -93,9 +93,9 @@ module.exports = {
     /**
      * Rename datasource
      * 
-     * @param  { String } name Datasource name
-     * @param  { String } newName New datasource name
-     * @return { Object } Datasource details
+     * @param  { string } name Datasource name
+     * @param  { string } newName New datasource name
+     * @return { object } Datasource details
      */
     renameDatasource: async (name, newName) => {
         try {
@@ -119,8 +119,8 @@ module.exports = {
     /**
      * Drop (delete) datasource by name
      * 
-     * @param  { String } name Datasource name
-     * @return { Boolean } Result as boolean
+     * @param  { string } name Datasource name
+     * @return { boolean } Result as boolean
      */
     dropDatasource: async name => {
         try {
@@ -139,9 +139,9 @@ module.exports = {
     /**
      * Append row to existing datasource
      * 
-     * @param  { String } name Datasource name
-     * @param  { Object } rows Rows to append
-     * @return { Boolean } Result as boolean
+     * @param  { string } name Datasource name
+     * @param  { object } rows Rows to append
+     * @return { boolean } Result as boolean
      */
     appendRows: async (name, rows) => {
         try {
@@ -165,9 +165,9 @@ module.exports = {
     /**
      * Append data file to existing datasource
      * 
-     * @param  { String } name Datasource name
-     * @param  { Object } filePath Path to file
-     * @return { Boolean } Result as boolean
+     * @param  { string } name Datasource name
+     * @param  { object } filePath Path to file
+     * @return { boolean } Result as boolean
      */
     appendFile: async (name, filePath) => {
         try {
@@ -194,9 +194,9 @@ module.exports = {
     /**
      * Delete specific rows from datasource usign a filter condition
      * 
-     * @param  { String } name Datasource name
-     * @param  { String } condition Filter condition
-     * @return { Boolean } Result as boolean
+     * @param  { string } name Datasource name
+     * @param  { string } condition Filter condition
+     * @return { boolean } Result as boolean
      */
     deleteRows: async (name, condition) => {
         try {
@@ -220,8 +220,8 @@ module.exports = {
     /**
      * Truncate datasource by name
      * 
-     * @param  { String } name Datasource name
-     * @return { Boolean } Result as boolean
+     * @param  { string } name Datasource name
+     * @return { boolean } Result as boolean
      */
     truncateDatasource: async name => {
         try {

@@ -3,13 +3,16 @@ import { validateAPIToken } from './lib/utils';
 import { setConfiguration, Settings } from './stores/configuration';
 import DatasourcesModule from './modules/datasources';
 import QueryModule from './modules/query';
+import PipesModule from './modules/pipes';
 
 module.exports = {
     /**
      * Initialize Tinybird SDK.
      * 
-     * @param { String } apiToken Tinybird API Token
-     * @param { Object } options SDK options
+     * @param { string } apiToken Tinybird API Token
+     * @param { object } [options] SDK options
+     * @param { boolean } [options.debug=false] Flag for debug logging
+     * @param { string } [options.apiUrl=https://api.tinybird.co] Base url for custom installations
      */
     init: (apiToken, options = {}) => {
         if (validateAPIToken(apiToken)) {
@@ -27,5 +30,6 @@ module.exports = {
     },
 
     ...QueryModule,
-    ...DatasourcesModule
+    ...DatasourcesModule,
+    ...PipesModule
 };

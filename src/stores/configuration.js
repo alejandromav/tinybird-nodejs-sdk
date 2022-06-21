@@ -1,11 +1,11 @@
 const _configuration = {
-    'api-url': 'https://api.tinybird.co'
+    'apiUrl': 'https://api.tinybird.co'
 };
 
 export const Settings = Object.freeze({
     DEBUG: 'debug',
-    API_URL: 'api-url',
-    API_TOKEN: 'api-token'
+    API_URL: 'apiUrl',
+    API_TOKEN: 'apiToken'
 });
 
 export const setConfiguration = (configKey, configValue) => {

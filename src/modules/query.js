@@ -8,8 +8,8 @@ module.exports = {
     /**
      * Execute SQL query
      * 
-     * @param  { String } sql SQL Query
-     * @return { Object } Resultset rows
+     * @param  { string } sql SQL Query
+     * @return { object } Resultset rows
      */
     query: async sql => {
         try {
