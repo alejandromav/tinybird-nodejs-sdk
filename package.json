@@ -1,6 +1,6 @@
 {
     "name": "tinybird-sdk",
-    "version": "0.3.0-SNAPSHOT",
+    "version": "0.3.0",
     "description": "Tinybird Node.js SDK",
     "main": "dist/index.js",
     "scripts": {

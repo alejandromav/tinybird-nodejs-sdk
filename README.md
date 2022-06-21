@@ -38,6 +38,14 @@ await tb.appendRows('characters', [
 // Query datasource
 const result = await tb.query('select * from characters');
 const characters = result['data'];
+
+// Query pipe
+const { meta, rows, statistics } = await tb.queryPipe(pipeName);
+
+// Query pipe with parameters
+const { meta, rows, statistics } = await tb.queryPipe(pipeName, {
+    age: 50
+});
 ```
 
 ## Development

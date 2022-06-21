@@ -13,6 +13,6 @@ Just run a SQL query using this method:
 const tb = require('tinybird-sdk');
 tb.init('p.eyJ1IjogIjZhNTdkYzFlCTM2ZTItNDNlYy04ZWRi...');
 
-// Query pipe
+// Execute SQL query
 const { meta, rows, statistics } = await tb.query('select * from test_datasource');
 ```
