@@ -13,6 +13,7 @@ export default {
     /**
      * Get all datasources
      * 
+     * @function getAllDatasources
      * @return { Promise<object> } All datasources available
      */
     getAllDatasources: async () => {
@@ -28,6 +29,7 @@ export default {
     /**
      * Get datasource detail by name
      * 
+     * @function getDatasource
      * @param  { string } name Datasource name
      * @return { Promise<object> } Datasource details
      */
@@ -44,6 +46,7 @@ export default {
     /**
      * Create new datasource
      * 
+     * @function createDatasource
      * @param  { string } name Datasource name
      * @param  { string } schema Datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
      * @return { Promise<object> } Datasource details
@@ -53,6 +56,7 @@ export default {
             const params = new URLSearchParams();
             params.append('name', name);
             params.append('schema', schema);
+            params.append('format', schema.includes('`json:') ? 'ndjson' : 'csv');
 
             const result = await fetch('/v0/datasources', {
                 method: 'POST',
@@ -67,9 +71,24 @@ export default {
         }
     },
 
+
+    /**
+     * Create new datasource from file
+     * 
+     * @function createDatasourceFromFile
+     * @param  { string } name Datasource name
+     * @param  { object } filePath Path to file
+     * @return { Promise<boolean> } Result as boolean
+     */
+    createDatasourceFromFile: () => {
+        // TODO: implement
+        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+    },
+
     /**
      * Alter existing datasource schema
      * 
+     * @function alterDatasource
      * @param  { string } name Datasource name
      * @param  { string } schema New datasource schema following this notation https://docs.tinybird.co/api-reference/datasource-api.html#create-from-schema
      * @return { Promise<object> } Performed alter operations
@@ -96,6 +115,7 @@ export default {
     /**
      * Rename datasource
      * 
+     * @function renameDatasource
      * @param  { string } name Datasource name
      * @param  { string } newName New datasource name
      * @return { Promise<object> } Datasource details
@@ -122,6 +142,7 @@ export default {
     /**
      * Drop (delete) datasource by name
      * 
+     * @function dropDatasource
      * @param  { string } name Datasource name
      * @return { Promise<boolean> } Result as boolean
      */
@@ -142,6 +163,7 @@ export default {
     /**
      * Append row to existing datasource
      * 
+     * @function appendRows
      * @param  { string } name Datasource name
      * @param  { object } rows Rows to append
      * @return { Promise<boolean> } Result as boolean
@@ -165,9 +187,24 @@ export default {
         }
     },
 
+
+    /**
+     * Replace datasource with these rows, deleting everything else as an idempotent operation
+     * 
+     * @function replaceWithRows
+     * @param  { string } name Datasource name
+     * @param  { object } rows Rows to replace with
+     * @return { Promise<boolean> } Result as boolean
+     */
+    replaceWithRows: () => {
+        // TODO: implement
+        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+    },
+
     /**
      * Append data file to existing datasource
      * 
+     * @function appendFile
      * @param  { string } name Datasource name
      * @param  { object } filePath Path to file
      * @return { Promise<boolean> } Result as boolean
@@ -178,9 +215,10 @@ export default {
             const stats = fs.statSync(filePath);
             const fileSizeInBytes = stats.size;
             const fileStream = fs.createReadStream(filePath);
-            form.append('csv', fileStream, { knownLength: fileSizeInBytes });
+            const format = filePath.split('.')[filePath.split('.').length-1];
+            form.append(format, fileStream, { knownLength: fileSizeInBytes });
 
-            const result = await fetch(`/v0/datasources?name=${name}&format=csv&mode=append&dialect_delimiter=,`, {
+            const result = await fetch(`/v0/datasources?name=${name}&format=${format}&mode=append&dialect_delimiter=,`, {
                 method: 'POST',
                 body: form
             });
@@ -195,8 +233,22 @@ export default {
     },
 
     /**
+     * Replace datasource with file content, deleting everything else as an idempotent operation
+     * 
+     * @function replaceWithFile
+     * @param  { string } name Datasource name
+     * @param  { object } filePath Path to file
+     * @return { Promise<boolean> } Result as boolean
+     */
+    replaceWithFile: () => {
+        // TODO: implement
+        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+    },
+    
+    /**
      * Delete specific rows from datasource usign a filter condition
      * 
+     * @function deleteRows
      * @param  { string } name Datasource name
      * @param  { string } condition Filter condition
      * @return { Promise<boolean> } Result as boolean
@@ -223,6 +275,7 @@ export default {
     /**
      * Truncate datasource by name
      * 
+     * @function truncateDatasource
      * @param  { string } name Datasource name
      * @return { Promise<boolean> } Result as boolean
      */

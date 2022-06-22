@@ -12,6 +12,7 @@ export default {
     /**
      * Initialize Tinybird SDK.
      * 
+     * @function init
      * @param { string } apiToken Tinybird API Token
      * @param { object } [options] SDK options
      * @param { boolean } [options.debug=false] Flag for debug logging

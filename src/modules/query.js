@@ -11,6 +11,7 @@ export default {
     /**
      * Execute SQL query
      * 
+     * @function query
      * @param  { string } sql SQL Query
      * @return { Promise<object> } Resultset rows
      */

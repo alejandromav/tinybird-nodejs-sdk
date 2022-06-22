@@ -1,0 +1,7 @@
+{ "name": "Han",      "profession": "Smuggler", "age": 30 }
+{ "name": "Luke",     "profession": "Hero",     "age": 32 }
+{ "name": "Leia",     "profession": "Princess", "age": 32 }
+{ "name": "Anakin",   "profession": "Jedi",     "age": 50 }
+{ "name": "Obi-Wan",  "profession": "Jedi",     "age": 65 }
+{ "name": "Chewie",   "profession": "Smuggler", "age": 30 }
+{ "name": "Lando",    "profession": "Smuggler", "age": 50 }

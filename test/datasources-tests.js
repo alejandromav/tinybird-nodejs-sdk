@@ -26,6 +26,33 @@ describe('Test Datasources API', () => {
         }
     });
 
+    it('should create a new valid NDJSON datasource', async () => {
+        try {
+            // Create datasource
+            const newName = `${datasourceName}_ndjson`;
+            let result = await tb.createDatasource(
+                newName,
+                'name String `json:$.name`, profession String `json:$.profession`, age UInt16 `json:$.age`'
+            );
+            expect(result['datasource']['name']).to.equals(newName);
+
+            // Append sample ndjson file
+            const filePath = path.join(__dirname, './fixtures/characters.ndjson')
+            result = await tb.appendFile(newName, filePath);
+            expect(result).to.equals(true);
+
+            // Drop datasource and check doesn't exist anymore
+            await tb.dropDatasource(newName);
+            try {
+                await tb.getDatasource(newName);
+            } catch (error) {
+                expect(error.message).to.eq(Exceptions.NOT_FOUND);
+            }
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
     it('should update datasource schema', async () => {
         try {
             const result = await tb.alterDatasource(
@@ -88,20 +115,20 @@ describe('Test Datasources API', () => {
 
     it('should append a large file to datasource', async () => {
         try {
+            // Create datasource
             const newName = `${datasourceName}_large`;
             await tb.createDatasource(
                 datasourceName,
                 'symbol String, date Date, open Float32, high Float32, low Float32, close Float32, close_adjusted Float32, volume Int64, split_coefficient Float32'
             );
 
+            // Append large csv file
             const filePath = path.join(__dirname, './fixtures/stock_prices_1M.csv')
             const result = await tb.appendFile(newName, filePath);
-
             expect(result).to.equals(true);
 
+            // Drop datasource and check doesn't exist anymore
             await tb.dropDatasource(newName);
-
-            // Check datasource doesn't exist anymore
             try {
                 await tb.getDatasource(newName);
             } catch (error) {

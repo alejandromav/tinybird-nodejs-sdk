@@ -11,6 +11,7 @@
         "declarationMap": true,
         "emitDeclarationOnly": true,
         "moduleResolution": "node",
+        "removeComments": false,
         "outDir": "dist",
         "strict": true,
         "target": "es6"

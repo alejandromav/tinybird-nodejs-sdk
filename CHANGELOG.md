@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Generate types on build
+- Add support for NDJSON datasources and importing .ndjson files
 
 ## [0.3.0] - 2022-06-21
 
