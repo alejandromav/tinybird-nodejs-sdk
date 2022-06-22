@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.4.0] - 2022-06-22
+
 - Generate types on build
 - Add support for NDJSON datasources and importing .ndjson files
 
@@ -35,7 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Validate API tokens
 - Validate and sanitize SQL queries
 
-[Unreleased]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/alejandromav/tinybird-nodejs-sdk/tree/0.1.0

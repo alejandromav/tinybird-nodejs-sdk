@@ -35,6 +35,10 @@ await tb.appendRows('characters', [
     { name: 'Lando',    profession: 'Smuggler', age: 50 }
 ]);
 
+// ...or append a file (local or remote)
+const filePath = path.join(__dirname, './characters.csv');
+await tb.appendFile(datasourceName, filePath);
+
 // Query datasource
 const result = await tb.query('select * from characters');
 const characters = result['data'];

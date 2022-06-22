@@ -124,6 +124,10 @@ describe('Test Datasources API', () => {
 
             // Append large csv file
             const filePath = path.join(__dirname, './fixtures/stock_prices_1M.csv')
+            
+            // Avoid API throttling (429)
+            await new Promise(resolve => setTimeout(resolve, 30000));
+
             const result = await tb.appendFile(newName, filePath);
             expect(result).to.equals(true);
 
