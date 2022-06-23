@@ -1,3 +1,4 @@
+import https from 'https';
 import f from 'node-fetch';
 import { getConfiguration, Settings } from '../stores/configuration';
 import Exceptions from './exceptions';
@@ -8,6 +9,7 @@ import pjson from '../../package.json';
 export const fetch = async (uri, options = {}) => {
     const response = await f(`${getConfiguration(Settings.API_URL)}${uri}`, {
         ...options,
+        agent: new https.Agent({ keepAlive: true }),
         headers: {
             'Authorization': `Bearer ${getConfiguration(Settings.API_TOKEN)}`,
             'Accept': 'application/json',

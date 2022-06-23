@@ -1,15 +1,16 @@
 # Tinybird Node.js SDK
 ![](https://github.com/alejandromav/tinybird-nodejs-sdk/workflows/CI/badge.svg)
 
-## Usage
-
 This library is documented in: [https://alejandromav.github.io/tinybird-nodejs-sdk](https://alejandromav.github.io/tinybird-nodejs-sdk)
 
-First install the NPM package:
-
+## Install
 ```bash
 npm i tinybird-sdk
 ```
+
+Requires Node.js >= 10.10.0
+
+## Usage
 
 And then you can use the SDK:
 
