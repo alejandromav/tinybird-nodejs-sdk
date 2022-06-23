@@ -2,7 +2,7 @@ import { getLogger } from '../lib/logger';
 const logger = getLogger('datasources-module');
 import { fetch } from '../lib/http';
 import Exceptions from '../lib/exceptions';
-import { rowsToCSV } from '../lib/utils';
+import { rowsToCSV, rowsToNDJSON } from '../lib/utils';
 import FormData from 'form-data';
 import fs from 'fs';
 
@@ -166,16 +166,35 @@ export default {
      * @function appendRows
      * @param  { string } name Datasource name
      * @param  { object } rows Rows to append
+     * @param  { string } [format=csv] Datasource format, one of: json, csv, ndjson, parquet.
      * @return { Promise<boolean> } Result as boolean
      */
-    appendRows: async (name, rows) => {
+    appendRows: async (name, rows, format='csv') => {
         try {
-            const result = await fetch(`/v0/datasources?name=${name}&format=csv&mode=append&dialect_delimiter=,`, {
+            let formattedRows;
+            switch(format) {
+                case 'csv':
+                    formattedRows = await rowsToCSV(rows);
+                    break;
+                case 'ndjson':
+                    formattedRows = rowsToNDJSON(rows);
+                    break;
+                case 'json':
+                    formattedRows = JSON.stringify(rows);
+                    break;
+            }
+
+            // Add delimiter when format is csv
+            if (format === 'csv') {
+                format += '&dialect_delimiter=,';
+            }
+
+            const result = await fetch(`/v0/datasources?name=${name}&format=${format}&mode=append`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'text/csv;charset=utf-8',
                 },
-                body: await rowsToCSV(rows)
+                body: formattedRows
             });
 
             logger.debug(`Rows appended to ${name}: ${rows.length}`);

@@ -36,8 +36,21 @@ describe('Test Datasources API', () => {
             );
             expect(result['datasource']['name']).to.equals(newName);
 
+            // Append some rows
+            const rows = [
+                { name: 'Han',    profession: 'Smuggler', age: 30 },
+                { name: 'Luke',   profession: 'Hero',     age: 32 },
+                { name: 'Leia',   profession: 'Princess', age: 32 },
+                { name: 'Anakin', profession: 'Jedi',     age: 50 },
+                { name: 'Obi',    profession: 'Jedi',     age: 65 }
+            ];
+            result = await tb.appendRows(newName, rows, 'ndjson');
+            expect(result).to.equals(true);
+
             // Append sample ndjson file
             const filePath = path.join(__dirname, './fixtures/characters.ndjson')
+            // Avoid API throttling (429)
+            await new Promise(resolve => setTimeout(resolve, 30000));
             result = await tb.appendFile(newName, filePath);
             expect(result).to.equals(true);
 
