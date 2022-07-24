@@ -2,7 +2,7 @@ import { getLogger } from '../lib/logger';
 const logger = getLogger('datasources-module');
 import { fetch } from '../lib/http';
 import Exceptions from '../lib/exceptions';
-import { rowsToCSV, rowsToNDJSON } from '../lib/utils';
+import { formatRows } from '../lib/utils';
 import FormData from 'form-data';
 import fs from 'fs';
 
@@ -166,23 +166,12 @@ export default {
      * @function appendRows
      * @param  { string } name Datasource name
      * @param  { object } rows Rows to append
-     * @param  { string } [format=csv] Datasource format, one of: json, csv, ndjson, parquet.
+     * @param  { string } [format=csv] Rows format, one of: json, csv, ndjson, parquet.
      * @return { Promise<boolean> } Result as boolean
      */
     appendRows: async (name, rows, format='csv') => {
         try {
-            let formattedRows;
-            switch(format) {
-                case 'csv':
-                    formattedRows = await rowsToCSV(rows);
-                    break;
-                case 'ndjson':
-                    formattedRows = rowsToNDJSON(rows);
-                    break;
-                case 'json':
-                    formattedRows = JSON.stringify(rows);
-                    break;
-            }
+            let formattedRows = await formatRows(format, rows);
 
             // Add delimiter when format is csv
             if (format === 'csv') {
@@ -208,16 +197,47 @@ export default {
 
 
     /**
-     * Replace datasource with these rows, deleting everything else as an idempotent operation
+     * Replace datasource with these rows, deleting everything else as an idempotent operation or optionally those rows matching a replace condition
      * 
      * @function replaceWithRows
      * @param  { string } name Datasource name
      * @param  { object } rows Rows to replace with
+     * @param  { string } [format=csv] Rows format, one of: json, csv, ndjson, parquet.
+     * @param  { string } [replaceCondition] When used in combination with the replace mode it allows you to replace a portion of your Data Source that matches the replace_condition SQL statement
      * @return { Promise<boolean> } Result as boolean
      */
-    replaceWithRows: () => {
-        // TODO: implement
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+    replaceWithRows: async (name, rows, format='csv', replaceCondition) => {
+        try {
+            let formattedRows = await formatRows(format, rows);
+            let replaceStatement = '';
+
+            // Add delimiter when format is csv
+            if (format === 'csv') {
+                format += '&dialect_delimiter=,';
+            }
+
+            // Add replace condition if exists
+            if (replaceCondition) {
+                replaceStatement = `&replace_condition=(${replaceCondition})`;
+            }
+
+            const result = await fetch(`/v0/datasources?name=${name}&format=${format}&mode=replace${replaceStatement}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/csv;charset=utf-8',
+                },
+                body: formattedRows
+            });
+
+            logger.debug(`Datasource ${name} replaced with rows: ${rows.length}`);
+            return result['error'] === false;
+        } catch (error) {
+            logger.error(`Error while replacing rows to datasource ${name}`);
+            logger.debug(`Format: ${format}`);
+            logger.debug(`Replace condition: ${replaceCondition}`);
+            logger.debug('Request: /v0/datasources/(.+)');
+            logger.debug(error);
+        }
     },
 
     /**

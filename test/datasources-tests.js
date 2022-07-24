@@ -165,7 +165,47 @@ describe('Test Datasources API', () => {
 
             expect(characters.length).to.eq(0);
         } catch (error) {
-            console.log(error)
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should replace datasource with rows', async () => {
+        try {
+            const rows = [
+                { name: 'Leia',   profession: 'Princess', age: 32 },
+                { name: 'Anakin', profession: 'Jedi',     age: 50 },
+                { name: 'Obi',    profession: 'Jedi',     age: 65 }
+            ];
+
+            // Avoid API throttling (429)
+            await new Promise(resolve => setTimeout(resolve, 30000));
+            await tb.replaceWithRows(datasourceName, rows);
+
+            const result = await tb.query(`select * from ${datasourceName}`);
+            const characters = result['data'];
+
+            expect(characters.length).to.eq(3);
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should replace datasource with rows matching a condition', async () => {
+        try {
+            const rows = [
+                { name: 'Mace Windu', profession: 'Jedi', age: 50 }
+            ];
+
+            // Avoid API throttling (429)
+            await new Promise(resolve => setTimeout(resolve, 30000));
+            await tb.replaceWithRows(datasourceName, rows, 'csv', 'profession = \'Jedi\'');
+
+            const result = await tb.query(`select * from ${datasourceName} where profession = 'Jedi'`);
+            const characters = result['data'];
+
+            expect(characters.length).to.eq(1);
+            expect(characters[0]['name']).to.eq('Mace Windu');
+        } catch (error) {
             expect(error).to.be.null;
         }
     });
@@ -179,7 +219,6 @@ describe('Test Datasources API', () => {
 
             expect(characters.length).to.eq(0);
         } catch (error) {
-            console.log(error)
             expect(error).to.be.null;
         }
     });
