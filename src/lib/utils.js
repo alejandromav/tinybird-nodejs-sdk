@@ -25,3 +25,19 @@ export const sanitizeSQL = sql => {
 };
 
 const _formatSQL = sql => sql.toLowerCase().trim();
+
+export const formatRows = async (format, rows) => {
+    let formattedRows;
+    switch (format) {
+        case 'csv':
+            formattedRows = await rowsToCSV(rows);
+            break;
+        case 'ndjson':
+            formattedRows = rowsToNDJSON(rows);
+            break;
+        case 'json':
+            formattedRows = JSON.stringify(rows);
+            break;
+    }
+    return formattedRows;
+};
