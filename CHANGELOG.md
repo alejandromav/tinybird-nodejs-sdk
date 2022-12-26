@@ -6,21 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
 - Add support for importing NDJSON rows
 - Add Keep-Alive http agent
+- Add `sendEvents`
 
 ## [0.4.0] - 2022-06-22
 
+### Added
 - Generate types on build
 - Add support for NDJSON datasources and importing .ndjson files
 
 ## [0.3.0] - 2022-06-21
 
+### Added
 - Add support for custom installations
 - Add `queryPipe`
 
 ## [0.2.0] - 2022-06-20
 
+### Added
 - Add `createDatasource`
 - Add `getAllDatasources`
 - Add `getDatasource`
@@ -34,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] - 2022-06-02
 
+### Added
 - Create basic project structure
 - Add `init` method
 - Add `query` method

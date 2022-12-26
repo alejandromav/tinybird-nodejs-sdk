@@ -9,6 +9,11 @@ export const validateAPIToken = apiToken => {
 };
 
 export const rowsToNDJSON = rows => {
+    // Support also single objects
+    if (!Array.isArray(rows)) {
+        rows = [ rows ];
+    }
+
     return rows.map(JSON.stringify).join('\n');
 };
 

@@ -4,5 +4,6 @@ export default Object.freeze({
     METHOD_NOT_IMPLEMENTED: 'Method not implemented',
     INVALID_SQL_QUERY: 'Invalid SQL query',
     BAD_REQUEST: 'Invalid parameters',
+    ERROR_APPENDING_EVENTS: 'Error appending events',
     NOT_FOUND: 'Not Found'
 });

@@ -198,4 +198,78 @@ describe('Test Datasources API', () => {
             expect(error.message).to.eq(Exceptions.NOT_FOUND);
         }
     });
+
+    it('should create a new valid NDJSON datasource for events', async () => {
+        try {
+            // Create datasource
+            const eventsDatasource = `${datasourceName}_events`;
+            let result = await tb.createDatasource(
+                eventsDatasource,
+                'name String `json:$.name`, profession String `json:$.profession`, age UInt16 `json:$.age`'
+            );
+            expect(result['datasource']['name']).to.equals(eventsDatasource);
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should append a single event', async () => {
+        try {
+            const eventsDatasource = `${datasourceName}_events`;
+    
+            // Append single event
+            const events = { name: 'Han', profession: 'Smuggler', age: 30 };
+            const result = await tb.sendEvents(eventsDatasource, events);
+
+            expect(result['successful_rows']).to.equals(1);
+            expect(result['quarantined_rows']).to.equals(0);
+
+            await tb.truncateDatasource(eventsDatasource);
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should append a single event in an Array', async () => {
+        try {
+            const eventsDatasource = `${datasourceName}_events`;
+    
+            // Append single event
+            const events = [{ name: 'Han', profession: 'Smuggler', age: 30 }];
+            const result = await tb.sendEvents(eventsDatasource, events);
+            expect(result['successful_rows']).to.equals(1);
+            expect(result['quarantined_rows']).to.equals(0);
+
+            await tb.truncateDatasource(eventsDatasource);
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
+    it('should append multiple events', async () => {
+        try {
+            const eventsDatasource = `${datasourceName}_events`;
+    
+            // Append single event
+            const events = [
+                { name: 'Han',    profession: 'Smuggler', age: 30 },
+                { name: 'Luke',   profession: 'Hero',     age: 32 },
+                { name: 'Leia',   profession: 'Princess', age: 32 },
+                { name: 'Anakin', profession: 'Jedi',     age: 50 },
+                { name: 'Obi',    profession: 'Jedi',     age: 65 }
+            ];
+            const result = await tb.sendEvents(eventsDatasource, events);
+            expect(result['successful_rows']).to.equals(5);
+            expect(result['quarantined_rows']).to.equals(0);
+
+            try {
+                await tb.dropDatasource(eventsDatasource);
+            } catch (error) {
+                expect(error).to.be.null;
+            }
+        } catch (error) {
+            expect(error).to.be.null;
+        }
+    });
+
 });

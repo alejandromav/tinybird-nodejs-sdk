@@ -312,8 +312,52 @@ export default {
         }
     },
 
-    /* Experimental */
-    sendEvents: () => {
-        throw new Error(Exceptions.METHOD_NOT_IMPLEMENTED);
+    /**
+     * Send events to Events API
+     * https://www.tinybird.co/docs/api-reference/events-api.html
+     * 
+     * Works for both:
+     *   - Multiple JSON objects in an array [ {} , {} ]
+     *   - Or a single object {}
+     * 
+     * @function sendEvent
+     * @param  { string } name Datasource name
+     * @param  { object } events JSON events. In array or single objects.
+     * @param  { boolean } wait Wait until the write is acknowledged by the database.
+     * @return { Promise<{ successful_rows: number, quarantined_rows: number }> } Operation result
+     */
+    sendEvents: async (name, events, wait = false) => {
+        try {
+            let formattedRows;
+            switch(typeof events) {
+                case 'object':
+                    formattedRows = rowsToNDJSON(events);
+                    break;
+                default:
+                    formattedRows = events.toString();
+                    break;
+            }
+
+            let result = await fetch(`/v0/events?name=${name}&wait=${wait}`, {
+                method: 'POST',
+                body: formattedRows
+            });
+            result = JSON.parse(result);
+
+            if (!result['error'] || result['error'] === false) {
+                logger.debug(`Events (${Array.isArray(events) ? events.length : 1}) appended to ${name}`);
+                return {
+                    successful_rows: result['successful_rows'],
+                    quarantined_rows: result['quarantined_rows']
+                };
+            } else {
+                throw new Error(result['error'] || Exceptions.ERROR_APPENDING_EVENTS);
+            }
+        } catch (error) {
+            logger.error(`Error while appending events to ${name}`);
+            logger.debug(`Request: /v0/events?name=${name}&wait=${wait}`);
+            logger.debug('Events: formattedRows');
+            logger.debug(error);
+        }
     }
 };
